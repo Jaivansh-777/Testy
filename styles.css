@@ -1,0 +1,124 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #050506;
+  --ink: #ececef;
+  --muted: #7c7d86;
+  --ice: #7cc8ff;
+  --ice-deep: #2f7fc4;
+
+  --font-display: "Archivo", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --pad-x: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; background: var(--bg); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 300;
+  letter-spacing: 0.002em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+::selection { background: var(--ice); color: #04121c; }
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: fixed;
+  top: 0.75rem; left: 0.75rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--ice);
+  color: #04121c;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  transform: translateY(-300%);
+  transition: transform 0.25s var(--ease);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* ---------- Video hero ---------- */
+.video-hero {
+  position: relative;
+  width: 100%; height: 100vh; height: 100dvh;
+  overflow: hidden;
+}
+.video-hero__sticky {
+  position: sticky;
+  top: 0; left: 0; right: 0;
+  height: 100vh; height: 100dvh;
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;
+}
+.video-hero__video,
+.video-hero__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.video-hero__video {
+  z-index: 1; opacity: 0; transition: opacity 0.9s;
+}
+.video-hero__video.is-ready { opacity: 1; }
+.video-hero__poster { z-index: 0; }
+
+/* ---------- Progress bar ---------- */
+.progress {
+  position: fixed; inset: 0 0 auto 0; z-index: 120; height: 2px;
+  background: rgba(236,236,239,0.06); pointer-events: none;
+}
+.progress__bar {
+  display: block; height: 100%; width: 100%;
+  background: linear-gradient(90deg, var(--ice-deep), var(--ice));
+  transform: scaleX(0); transform-origin: 0 50%;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Body margin ---------- */
+body { margin: 0; padding: 0; }
